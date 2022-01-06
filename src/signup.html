@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <link rel="stylesheet" href="css/sign.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="left">
+           <form >
+           <h1>Create an account</h1>
+               <div class="top">
+               <input  class="input" id ="email" type="email" placeholder="Enter your email" required/>
+               </div>
+               <div class="mid">
+                <input  class="input" id ="username" type="text" placeholder="Enter your username"/>
+               </div> 
+               <div class="low">
+                <input  class="input" id ="number" type="text" placeholder="Enter your phone number"/>
+               </div> 
+               <div>
+               <input class="input" id ="password" type="password" placeholder="Enter your password" required/>
+               </div>
+             <button class="button"><a href="/">Sign up</a></button>
+             <div>
+             <p>Already have an account? <a class="login" href="/login">Login</a></p>
+             </div>
+           </form>
+        </div>
+        <div class="right">
+            <!-- <img class="house" src="" alt="housing"> -->
+        </div>
+    </div>
+    <div class="footer">
+        <p>&copy;ENL2021</p>
+        </div>
+<script>
+     document.addEventListener("click", sendData);
+        function sendData(e) {
+        //   e.preventDefault();
+          const email = document.querySelector("#email").value;
+          const name = document.querySelector("#username").value;
+          const number = document.querySelector("#number").value;
+          const password = document.querySelector("#password").value;
+  
+          fetch("/api/users/register", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              email: email,
+              name: name,
+              phone: number,
+              password: password,
+            
+            })
+          })
+            .then(res => res.json())
+            .then(data => {
+              savedUser = data;
+            })
+            .catch(err => console.log(err));
+        }
+</script>
+</body>
+</html>
